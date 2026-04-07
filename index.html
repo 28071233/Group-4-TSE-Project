@@ -3,40 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Welcome to Computer Science!</title>
 
     <style>
-        div {
-            width: 20%;
-            height: 150pt;
-            margin-bottom: 10pt;
-            background-color:slategrey;
-            border: 3px solid darkblue;
-            border-radius: 5px;
+        body {
+            background-color: #161b22;
         }
 
         h1 {
-            align-content: center;
+            color: cornsilk;
+            text-align: center;
+            margin-left: 32%;
+        }
+
+        /*Sidebar placement and style */
+        aside {
+            height: 100%;
+            width: 32%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            padding-top: 20px;
+        }
+
+        /*Sidebar options style*/
+        aside a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+        }
+
+        /*Main page content placement*/
+        div {
+            margin-left: 32%; /*margin left must be the same as the width of aside*/
+            padding: 0px 10px;
+            color: azure;
         }
     </style>
 </head>
 
 <body>
-    <h1>Index Header Text</h1>
-    <a href="algorithms.html" target="_self">
-        <div>
-            <span>Algorithms</span>
-        </div>
-    </a>
-    <a href="architecture.html" target="_self">
-        <div>
-            <span>Architecture</span>
-        </div>
-    </a>
-    <a href="security.html" target="_self">
-        <div>
-            <span>Cyber Security</span>
-        </div>
-    </a>
+    <h1>Welcome to Computer Science!</h1>
+    <!-- Sidebar -->
+    <aside>
+        <a href="algorithms.html">Algorithms</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="security.html">Security</a>
+    </aside>
+    <!-- Page Content -->
+    <div>
+        <p>this text is supposed to update when an option on the side bar is hovered over</p>
+    </div>
 </body>
 </html>
