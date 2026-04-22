@@ -1,11 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Phishing Awareness Game</title>
+
+    <style>
+        /* Basic page styling */
+        body { font-family: Arial; text-align: center; background: #f4f4f4; }
+
+        /* Main content box */
+        .container { width: 60%; margin: auto; background: white; padding: 20px; border-radius: 10px; }
+
+        /* Header with title + back button */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Back button styling */
+        .back {
+            text-decoration: none;
+            color: #3498db;
+            font-size: 14px;
+        }
+
+        /* Email display box */
+        .email {
+            text-align: left;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        /* Button styling */
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Different colours for answers */
+        .phish { background: #e74c3c; color: white; }
+        .safe { background: #2ecc71; color: white; }
+    </style>
 </head>
+
 <body>
-    <h1>security</h1>
+
+<div class="container">
+
+    <!-- Header section -->
+    <div class="header">
+        <h1>Cyber Security</h1>
+        <!-- Back button to homepage -->
+        <a href="index.html" class="back">Back</a>
+    </div>
+
+    <h2>Spot the Phishing Email</h2>
+
+    <!-- Game area -->
+    <div id="game">
+
+        <!-- Email content shown to user -->
+        <div class="email">
+            <p><strong>From:</strong> <span id="from"></span></p>
+            <p><strong>Subject:</strong> <span id="subject"></span></p>
+            <p id="body"></p>
+        </div>
+
+        <!-- Answer buttons -->
+        <button class="phish" onclick="answer('phishing')">Phishing</button>
+        <button class="safe" onclick="answer('safe')">Safe</button>
+
+        <!-- Feedback + explanation -->
+        <p id="feedback"></p>
+        <p id="explanation"></p>
+    </div>
+
+    <!-- End screen -->
+    <div id="end" style="display:none;">
+        <h2>Quiz Complete</h2>
+        <p>Your Score: <span id="finalScore"></span></p>
+        <button onclick="restart()">Play Again</button>
+    </div>
+
+</div>
+
+<script>
+
+/* List of emails for the quiz */
+const emails = [
+{
+from: "security@paypa1.com",
+subject: "URGENT: Account Suspended",
+body: "Your account has been suspended. Click here to verify immediately.",
+answer: "phishing",
+explanation: "Fake domain (paypa1), urgency, and suspicious link."
+},
+{
+from: "noreply@university.ac.uk",
+subject: "Course Reminder",
+body: "Reminder: Your lecture starts at 10AM tomorrow.",
+answer: "safe",
+explanation: "Legitimate domain and no suspicious links."
+}
+];
+
+/* Track current question and score */
+let index = 0;
+let score = 0;
+
+/* Load an email onto the page */
+function loadEmail() {
+
+    // If no more emails, show final screen
+    if (index >= emails.length) {
+        document.getElementById("game").style.display = "none";
+        document.getElementById("end").style.display = "block";
+        document.getElementById("finalScore").innerText = score + "/" + emails.length;
+        return;
+    }
+
+    // Get current email
+    let e = emails[index];
+
+    // Display email details
+    document.getElementById("from").innerText = e.from;
+    document.getElementById("subject").innerText = e.subject;
+    document.getElementById("body").innerText = e.body;
+
+    // Clear previous feedback
+    document.getElementById("feedback").innerText = "";
+    document.getElementById("explanation").innerText = "";
+}
+
+/* Check user answer */
+function answer(choice) {
+
+    let correct = emails[index];
+
+    // Compare user choice with correct answer
+    if (choice === correct.answer) {
+        score++; // increase score
+        document.getElementById("feedback").innerText = "Correct";
+    } else {
+        document.getElementById("feedback").innerText = "Incorrect";
+    }
+
+    // Show explanation
+    document.getElementById("explanation").innerText = correct.explanation;
+
+    index++; // move to next email
+
+    // Load next email after 2 seconds
+    setTimeout(loadEmail, 2000);
+}
+
+/* Restart the game */
+function restart() {
+    index = 0;
+    score = 0;
+    document.getElementById("game").style.display = "block";
+    document.getElementById("end").style.display = "none";
+    loadEmail();
+}
+
+// Start the game
+loadEmail();
+
+</script>
+
 </body>
 </html>
