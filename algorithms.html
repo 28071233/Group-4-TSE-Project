@@ -22,11 +22,14 @@
             font-size: 14px;
         }
 
-        /* Container for bars */
+        /* Container for bars (FIXED HERE) */
         .container {
             display: flex;
             justify-content: center;
+            align-items: flex-end; /* bars grow upwards */
             margin-top: 20px;
+            height: 300px; /* gives space for bars */
+            border: 1px solid #ccc; /* optional visual aid */
         }
 
         /* Each bar represents a number */
@@ -34,6 +37,7 @@
             width: 25px;
             margin: 3px;
             background: steelblue;
+            display: inline-block;
         }
 
         /* Highlight bars being compared */
@@ -50,11 +54,12 @@
 
 <div class="header">
     <h1>Algorithms</h1>
-    <!-- Back button -->
     <a href="index.html" class="back">Back</a>
 </div>
 
 <h2>Bubble Sort Visualiser</h2>
+
+<p>Press "Auto Sort" to see how Bubble Sort works step by step.</p>
 
 <!-- Controls -->
 <button onclick="generateArray()">New Array</button>
@@ -74,27 +79,25 @@
 
 /* Array and control variables */
 let arr = [];
-let i = 0; // outer loop
-let j = 0; // inner loop
+let i = 0;
+let j = 0;
 let sorting = false;
 
 /* Create a new random array */
 function generateArray() {
     arr = [];
 
-    // Fill array with random values
     for (let k = 0; k < 15; k++) {
         arr.push(Math.floor(Math.random() * 100) + 10);
     }
 
-    // Reset counters
     i = 0;
     j = 0;
     sorting = false;
 
     document.getElementById("status").innerText = "";
 
-    draw(); // display array
+    draw();
 }
 
 /* Draw bars on screen */
@@ -108,15 +111,13 @@ function draw(active1 = -1, active2 = -1) {
         let bar = document.createElement("div");
         bar.classList.add("bar");
 
-        // Height represents value
-        bar.style.height = value + "px";
+        // Make bars taller so they are easier to see
+        bar.style.height = (value * 2) + "px";
 
-        // Highlight compared elements
         if (index === active1 || index === active2) {
             bar.classList.add("active");
         }
 
-        // Mark sorted elements
         if (index >= arr.length - i) {
             bar.classList.add("sorted");
         }
@@ -132,10 +133,8 @@ function step() {
 
         if (j < arr.length - i - 1) {
 
-            // Highlight current comparison
             draw(j, j + 1);
 
-            // Swap if needed
             if (arr[j] > arr[j + 1]) {
                 let temp = arr[j];
                 arr[j] = arr[j + 1];
@@ -146,7 +145,7 @@ function step() {
 
         } else {
             j = 0;
-            i++; // move to next pass
+            i++;
         }
 
     } else {
@@ -155,7 +154,6 @@ function step() {
         return;
     }
 
-    // Continue automatically if enabled
     if (sorting) {
         setTimeout(step, document.getElementById("speed").value);
     }
@@ -167,7 +165,7 @@ function startSort() {
     step();
 }
 
-// Generate first array when page loads
+/* Run when page loads */
 generateArray();
 
 </script>
