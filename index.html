@@ -43,19 +43,38 @@
             color: azure;
         }
     </style>
+
+    <script>
+        function welcomeText() {
+            document.getElementById("pageText").innerHTML = "Welcome to Computer Science! hover over the buttons on the sidebar to update this text";
+        }
+
+        function algorithmsText() {
+            document.getElementById("pageText").innerHTML = "Algorithms";
+        }
+
+        function architectureText() {
+            document.getElementById("pageText").innerHTML = "Architecture";
+        }
+
+         function cyberSecurityText() {
+            document.getElementById("pageText").innerHTML = "Cyber Security";
+        }
+    </script>
 </head>
 
 <body>
     <h1>Welcome to Computer Science!</h1>
     <!-- Sidebar -->
     <aside>
-        <a href="algorithms.html">Algorithms</a>
-        <a href="architecture.html">Architecture</a>
-        <a href="security.html">Security</a>
+        <a onmouseover=welcomeText() href="index.html">Welcome!</a>
+        <a onmouseover=algorithmsText() href="algorithms.html">Algorithms</a>
+        <a onmouseover=architectureText() href="architecture.html">Architecture</a>
+        <a onmouseover=cyberSecurityText() href="security.html">Cyber Security</a>
     </aside>
     <!-- Page Content -->
     <div>
-        <p>this text is supposed to update when an option on the side bar is hovered over</p>
+        <p id="pageText">Welcome to Computer Science! hover over the buttons on the sidebar to update this text</p>
     </div>
 </body>
 </html>
