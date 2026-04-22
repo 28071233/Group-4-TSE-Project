@@ -1,11 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sorting Visualiser</title>
+
+    <style>
+        body { text-align: center; font-family: Arial; background: #f4f4f4; }
+
+        /* Header layout */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+            margin: auto;
+        }
+
+        /* Back button */
+        .back {
+            text-decoration: none;
+            color: #3498db;
+            font-size: 14px;
+        }
+
+        /* Container for bars */
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Each bar represents a number */
+        .bar {
+            width: 25px;
+            margin: 3px;
+            background: steelblue;
+        }
+
+        /* Highlight bars being compared */
+        .active { background: red; }
+
+        /* Bars that are sorted */
+        .sorted { background: green; }
+
+        button, input { margin: 10px; padding: 10px; }
+    </style>
 </head>
+
 <body>
-    <h1>algorithms</h1>
+
+<div class="header">
+    <h1>Algorithms</h1>
+    <!-- Back button -->
+    <a href="index.html" class="back">Back</a>
+</div>
+
+<h2>Bubble Sort Visualiser</h2>
+
+<!-- Controls -->
+<button onclick="generateArray()">New Array</button>
+<button onclick="startSort()">Auto Sort</button>
+
+<label>
+    Speed:
+    <input type="range" min="50" max="1000" value="300" id="speed">
+</label>
+
+<!-- Where bars appear -->
+<div class="container" id="array"></div>
+
+<p id="status"></p>
+
+<script>
+
+/* Array and control variables */
+let arr = [];
+let i = 0; // outer loop
+let j = 0; // inner loop
+let sorting = false;
+
+/* Create a new random array */
+function generateArray() {
+    arr = [];
+
+    // Fill array with random values
+    for (let k = 0; k < 15; k++) {
+        arr.push(Math.floor(Math.random() * 100) + 10);
+    }
+
+    // Reset counters
+    i = 0;
+    j = 0;
+    sorting = false;
+
+    document.getElementById("status").innerText = "";
+
+    draw(); // display array
+}
+
+/* Draw bars on screen */
+function draw(active1 = -1, active2 = -1) {
+
+    const container = document.getElementById("array");
+    container.innerHTML = "";
+
+    arr.forEach((value, index) => {
+
+        let bar = document.createElement("div");
+        bar.classList.add("bar");
+
+        // Height represents value
+        bar.style.height = value + "px";
+
+        // Highlight compared elements
+        if (index === active1 || index === active2) {
+            bar.classList.add("active");
+        }
+
+        // Mark sorted elements
+        if (index >= arr.length - i) {
+            bar.classList.add("sorted");
+        }
+
+        container.appendChild(bar);
+    });
+}
+
+/* Perform one step of bubble sort */
+function step() {
+
+    if (i < arr.length) {
+
+        if (j < arr.length - i - 1) {
+
+            // Highlight current comparison
+            draw(j, j + 1);
+
+            // Swap if needed
+            if (arr[j] > arr[j + 1]) {
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+
+            j++;
+
+        } else {
+            j = 0;
+            i++; // move to next pass
+        }
+
+    } else {
+        sorting = false;
+        document.getElementById("status").innerText = "Sorted";
+        return;
+    }
+
+    // Continue automatically if enabled
+    if (sorting) {
+        setTimeout(step, document.getElementById("speed").value);
+    }
+}
+
+/* Start automatic sorting */
+function startSort() {
+    sorting = true;
+    step();
+}
+
+// Generate first array when page loads
+generateArray();
+
+</script>
+
 </body>
 </html>
