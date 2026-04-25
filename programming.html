@@ -1,12 +1,199 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Programming in Python</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: white;
+        }
+
+        .container {
+            width: 60%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #3498db;
+            font-size: 14px;
+        }
+
+        .questionBox {
+            margin-top: 20px;
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        input {
+            padding: 8px;
+            margin-top: 15px;
+            width: 60%;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #3498db;
+            color: white;
+        }
+
+        .hintBtn { background: #f39c12; }
+
+        #feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #hint {
+            margin-top: 10px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .console {
+            margin-top: 20px;
+            background: black;
+            color: lime;
+            padding: 15px;
+            text-align: left;
+            font-family: monospace;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Programming Fundamentals</h1>
-    <a href="index.html" target="_self">Back</a>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Programming Fundamentals</h1>
+        <a href="index.html" class="back">Back</a>
+    </div>
+
+    <h2>Fill in the Blanks</h2>
+
+    <div class="questionBox" id="question"></div>
+
+    <input type="text" id="answer" placeholder="Type your answer here">
+
+    <br>
+    <button id="submitBtn" onclick="checkAnswer()">Submit</button>
+    <button id="hintBtn" class="hintBtn" onclick="showHint()">Show Hint</button>
+
+    <p id="hint"></p>
+    <p id="feedback"></p>
+
+    <div class="console" id="console"></div>
+
+</div>
+
+<script>
+
+/* Questions & answers */
+const questions = [
+{
+    q: "Fill in the blank:<br><br>___('Hello World')",
+    a: "print",
+    hint: "Displays text to the screen.",
+    output: "Hello World"
+},
+{
+    q: "Fill in the blank:<br><br>___ x > 10:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Big')",
+    a: "if",
+    hint: "Used to check a condition.",
+    output: "Big"
+},
+{
+    q: "Fill in the blank:<br><br>if x > 10:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Big')<br>___:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Small')",
+    a: "else",
+    hint: "Runs when the if condition is false.",
+    output: "Small"
+},
+{
+    q: "Fill in the blank:<br><br>for i in ___(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)",
+    a: "range",
+    hint: "Used to repeat code a number of times.",
+    output: "0\n1\n2"
+},
+{
+    q: "Fill in the blank:<br><br>for i in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;___('Loop')",
+    a: "print",
+    hint: "Outputs text each loop.",
+    output: "Loop\nLoop\nLoop"
+}
+];
+
+let current = 0;
+
+/* Load questions */
+function loadQuestion() {
+
+    if (current >= questions.length) {
+        document.getElementById("question").innerHTML = "Completed!";
+
+        document.getElementById("answer").style.display = "none";
+        document.getElementById("submitBtn").style.display = "none";
+        document.getElementById("hintBtn").style.display = "none";
+        document.getElementById("console").style.display = "none";
+
+        document.getElementById("feedback").innerText = "";
+        document.getElementById("hint").innerText = "";
+
+        return;
+    }
+
+    document.getElementById("question").innerHTML = questions[current].q;
+    document.getElementById("feedback").innerText = "";
+    document.getElementById("hint").innerText = "";
+    document.getElementById("answer").value = "";
+    document.getElementById("console").style.display = "none";
+}
+
+/* Check answers */
+function checkAnswer() {
+    let user = document.getElementById("answer").value.trim();
+
+    if (user === questions[current].a) {
+        document.getElementById("feedback").innerText = "Correct";
+
+        let consoleBox = document.getElementById("console");
+        consoleBox.style.display = "block";
+        consoleBox.innerText = questions[current].output;
+
+        current++;
+        setTimeout(loadQuestion, 2000);
+
+    } else {
+        document.getElementById("feedback").innerText = "Try again or use a hint";
+    }
+}
+
+/* Shows hints */
+function showHint() {
+    document.getElementById("hint").innerText = "Hint: " + questions[current].hint;
+}
+
+
+loadQuestion();
+
+</script>
+
 </body>
 </html>
