@@ -49,6 +49,10 @@
             document.getElementById("pageText").innerHTML = "Welcome to Computer Science! hover over the buttons on the sidebar to update this text";
         }
 
+        function aiText() {
+            document.getElementById("pageText").innerHTML = "Artificial Inteligence";
+        }
+
         function algorithmsText() {
             document.getElementById("pageText").innerHTML = "Algorithms";
         }
@@ -72,6 +76,7 @@
     <!-- Sidebar -->
     <aside>
         <a onmouseover=welcomeText() href="index.html">Welcome!</a>
+        <a onmouseover=aiText() href="ai.html">Artificial Inteligence</a>
         <a onmouseover=algorithmsText() href="algorithms.html">Algorithms</a>
         <a onmouseover=architectureText() href="architecture.html">Architecture</a>
         <a onmouseover=cyberSecurityText() href="security.html">Cyber Security</a>
