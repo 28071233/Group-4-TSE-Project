@@ -1,12 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Artificial Intelligence</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f4f4f4;
+        }
+
+        .container {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #3498db;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #3498db;
+            color: white;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Artificial Inteligence</h1>
-    <a href="index.html" target="_self">Back</a>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>Artificial Intelligence</h1>
+            <a href="index.html" class="back">Back</a>
+        </div>
+
+        <h2>What is AI?</h2>
+        <p>
+            Artificial Intelligence (AI) allows computers to perform tasks that normally
+            require human intelligence, such as recognising images, understanding speech,
+            learning from data, and making decisions.
+        </p>
+
+        <h2>AI Quiz</h2>
+
+        <p id="question"></p>
+        <div id="options"></div>
+        <p id="result"></p>
+
+    </div>
+
+    <script>
+        const questions = [
+            {
+                q: "Which of these is an example of Artificial Intelligence?",
+                options: ["A calculator", "Face recognition", "A keyboard"],
+                answer: 1
+            },
+            {
+                q: "Which field uses AI to learn from data?",
+                options: ["Machine Learning", "Typing", "Printing"],
+                answer: 0
+            },
+            {
+                q: "Which of these commonly uses AI?",
+                options: ["Voice assistants", "A pencil", "A light switch"],
+                answer: 0
+            }
+        ];
+
+        let current = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            if (current >= questions.length) {
+                document.getElementById("question").innerText = "Quiz Complete!";
+                document.getElementById("options").innerHTML = "";
+                document.getElementById("result").innerText = "Score: " + score + "/" + questions.length;
+                return;
+            }
+
+            document.getElementById("question").innerText = questions[current].q;
+
+            let optionsHTML = "";
+
+            for (let i = 0; i < questions[current].options.length; i++) {
+                optionsHTML += "<button onclick='checkAnswer(" + i + ")'>" +
+                    questions[current].options[i] +
+                    "</button>";
+            }
+
+            document.getElementById("options").innerHTML = optionsHTML;
+            document.getElementById("result").innerText = "";
+        }
+
+        function checkAnswer(choice) {
+            if (choice === questions[current].answer) {
+                score++;
+                document.getElementById("result").innerText = "Correct!";
+            } else {
+                document.getElementById("result").innerText = "Incorrect!";
+            }
+
+            current++;
+            setTimeout(loadQuestion, 1500);
+        }
+
+        loadQuestion();
+    </script>
+
 </body>
 </html>
