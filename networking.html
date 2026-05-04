@@ -1,139 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Networking Mini Game</title>
 
     <style>
-        body {
-            font-family: Arial;
-            background-color: #f0f0f0;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 80%;
-            margin: auto;
-            margin-bottom: 30px;
-        }
-
-        .back {
-            text-decoration: none;
-            color: #7C3AED;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .back:hover {
-            color: #06B6D4;
-        }
-
-        h1 {
-            color: #7C3AED;
-            flex-grow: 1;
-            margin: 0;
-        }
-
-        .container {
-            background-color: white;
-            padding: 30px;
-            margin: 20px auto;
-            max-width: 900px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        p {
-            color: #333;
-            line-height: 1.6;
-            text-align: left;
-        }
-
-        .info-box {
-            background-color: #f9f9f9;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
-            text-align: left;
-        }
-
-        button {
-            background-color: #7C3AED;
-            color: white;
-            padding: 12px 25px;
-            margin: 20px 0;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        button:hover {
-            background-color: #6D28D9;
-        }
-
-        a.play-btn {
-            background-color: #7C3AED;
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        a.play-btn:hover {
-            background-color: #6D28D9;
-        }
+        body { text-align: center; font-family: Arial; background: #f4f4f4; }
+        .header { display: flex; justify-content: space-between; align-items: center; width: 80%; margin: auto; }
+        .back { text-decoration: none; color: #3498db; font-size: 14px; }
+        h1 { color: #333; flex-grow: 1; margin: 0; }
+        .content { width: 80%; margin: 20px auto; background: white; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        p, h3 { color: #333; text-align: left; }
+        .computers { display: flex; justify-content: space-around; align-items: center; margin: 30px 0; padding: 20px; background: #f9f9f9; border-radius: 5px; }
+        .computer { background: steelblue; color: white; padding: 15px 25px; border-radius: 5px; font-weight: bold; }
+        .arrow { font-size: 30px; color: #999; }
+        button { background: steelblue; color: white; padding: 10px 20px; margin: 10px 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        button:hover { background: darkblue; }
+        .status { background: #e8f4f8; padding: 15px; margin: 15px 0; border-left: 3px solid steelblue; border-radius: 5px; font-weight: bold; }
+        .status-detail { background: #e8f4f8; padding: 10px; margin: 10px 0; border-radius: 5px; font-size: 12px; }
+        .info-box { background: #f9f9f9; padding: 12px; margin: 10px 0; border-radius: 5px; text-align: left; }
+        h3 { color: steelblue; margin-top: 15px; }
+        .journey-container { display: flex; justify-content: space-around; margin: 20px 0; padding: 15px; background: #f9f9f9; border-radius: 5px; }
+        .journey-box { background: #ddd; color: #333; padding: 12px 15px; border-radius: 5px; font-weight: bold; font-size: 12px; min-width: 60px; transition: all 0.3s ease; }
+        .journey-box.active { background: steelblue; color: white; transform: scale(1.15); }
+        .journey-box.completed { background: #4a7ba7; color: white; }
+        .circular-container { position: relative; width: 400px; height: 300px; margin: 30px auto; background: #f9f9f9; border: 2px solid #ccc; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .path-circle { position: absolute; border: 2px dashed #ddd; border-radius: 50%; width: 360px; height: 260px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .packet-circle { position: absolute; font-size: 40px; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
+        .stage-marker { position: absolute; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background: white; border: 2px solid #ddd; border-radius: 50%; font-size: 10px; font-weight: bold; color: #333; transition: all 0.3s ease; }
+        .stage-marker.active { background: steelblue; color: white; border-color: steelblue; transform: scale(1.2); }
+        .stage-marker.completed { background: #4a7ba7; color: white; border-color: #4a7ba7; }
     </style>
 </head>
 
 <body>
 
-    <div class="header">
-        <a href="index.html" class="back">← Back to Home</a>
-        <h1>🌐 Networking Mini Game</h1>
-        <div></div>
+<div class="header">
+    <h1>Networking</h1>
+    <a href="index.html" class="back">Back</a>
+</div>
+
+<div class="content">
+
+    <h2>🌐 Networking Mini Game</h2>
+    <p>Learn how data packets travel between computers! Watch the animation and understand networking concepts.</p>
+
+    <!-- Computers -->
+    <div class="computers">
+        <div class="computer">💻 Computer A<br>192.168.1.1</div>
+        <div class="arrow">→</div>
+        <div class="computer">💻 Computer B<br>192.168.1.2</div>
     </div>
 
-    <div class="container">
-        <p>
-            Welcome to the Networking Mini Game! This interactive educational application helps students 
-            understand how data packets travel between computers over a network. Learn networking concepts 
-            through visualization and hands-on interaction.
-        </p>
-
-        <div class="info-box">
-            <strong>What You'll Learn:</strong>
-            <ul style="text-align: left;">
-                <li>How data packets are transmitted between computers</li>
-                <li>Understanding IP addresses and their role in networking</li>
-                <li>How routers guide data to its destination</li>
-                <li>The fundamentals of internet communication</li>
-            </ul>
-        </div>
-
-        <div class="info-box">
-            <strong>Features:</strong>
-            <ul style="text-align: left;">
-                <li>Interactive packet animation showing real-time data transmission</li>
-                <li>Step-by-step journey visualization (Prepare → Send → Travel → Receive)</li>
-                <li>Educational explanations of networking concepts</li>
-                <li>Responsive design for all devices</li>
-            </ul>
-        </div>
-
-        <a href="networking-mini-game/index.html" class="play-btn">Start Playing →</a>
+    <!-- Journey Visualization -->
+    <h3>Packet Journey Through Network</h3>
+    <div class="journey-container">
+        <div id="step1" class="journey-box">Prepare</div>
+        <div id="step2" class="journey-box">Router 1</div>
+        <div id="step3" class="journey-box">ISP</div>
+        <div id="step4" class="journey-box">Internet</div>
+        <div id="step5" class="journey-box">Router 2</div>
+        <div id="step6" class="journey-box">Receive</div>
     </div>
+
+    <!-- Circular Animation Path -->
+    <div class="circular-container">
+        <div class="path-circle outer"></div>
+        
+        <!-- Stage markers arranged in circle -->
+        <div id="marker1" class="stage-marker" style="top: 10px; left: 50%; transform: translateX(-50%);">1</div>
+        <div id="marker2" class="stage-marker" style="top: 45px; right: 30px;">2</div>
+        <div id="marker3" class="stage-marker" style="bottom: 45px; right: 30px;">3</div>
+        <div id="marker4" class="stage-marker" style="bottom: 10px; left: 50%; transform: translateX(-50%);">4</div>
+        <div id="marker5" class="stage-marker" style="bottom: 45px; left: 30px;">5</div>
+        <div id="marker6" class="stage-marker" style="top: 45px; left: 30px;">6</div>
+        
+        <!-- Packet moving in circle -->
+        <div id="packetCircle" class="packet-circle" style="display: none;">📦</div>
+    </div>
+
+    <div>
+        <button onclick="sendPacket()">Send Packet</button>
+        <button onclick="reset()">Reset</button>
+    </div>
+
+    <div id="status" class="status">Ready to send packet...</div>
+    <div id="statusDetail" class="status-detail"></div>
+
+    <!-- Animation Explanation -->
+    <h3>How the Animation Works</h3>
+    <div class="info-box">
+        <strong>Stage 1 - Prepare:</strong> Computer A creates a packet with the sender's IP (192.168.1.1) and destination IP (192.168.1.2), then adds the data to send.<br><br>
+        <strong>Stage 2 - Router 1:</strong> The packet travels from Computer A to your home router, which reads the destination address and decides where to send it next.<br><br>
+        <strong>Stage 3 - ISP:</strong> Router 1 forwards the packet to your Internet Service Provider's network for transmission across the internet.<br><br>
+        <strong>Stage 4 - Internet:</strong> The packet travels through multiple routers and networks across the internet, potentially taking different paths than other packets.<br><br>
+        <strong>Stage 5 - Router 2:</strong> The packet arrives at the destination network's router, which recognizes the IP address and forwards it to Computer B.<br><br>
+        <strong>Stage 6 - Receive:</strong> Computer B receives the packet, verifies it, and reassembles any data that may have been split into multiple packets.
+    </div>
+
+    <h3>What You're Seeing</h3>
+    <div class="info-box">
+        The 📦 packet (shown as a box icon) travels in a circular path to represent its journey through the network layers. The numbered circles (1-6) mark each stage of the journey. The colored boxes below the animation show which stage is currently active (blue), completed (dark blue), or pending (gray).
+    </div>
+
+</div>
+
+<script>
+    const msgs = ["Preparing packet...", "Sending to Router 1", "Reaching ISP", "Traveling through Internet", "Reaching Router 2", "Received! ✓"];
+    let animInterval;
+
+    function highlight(cls, num) {
+        for (let i = 1; i <= 6; i++) {
+            let el = document.getElementById(cls + i);
+            el.className = cls === "step" ? "journey-box" : "stage-marker";
+            if (i < num) el.className += " completed";
+            if (i === num) el.className += " active";
+        }
+    }
+
+    function sendPacket() {
+        let pkt = document.getElementById("packetCircle");
+        pkt.style.display = "flex";
+        let start = Date.now();
+
+        animInterval = setInterval(() => {
+            let prog = Math.min((Date.now() - start) / 4000, 1);
+            let stage = Math.floor(prog * 6) + 1;
+            
+            highlight("step", stage);
+            highlight("marker", stage);
+            document.getElementById("statusDetail").textContent = msgs[stage - 1];
+
+            let ang = prog * 360 - 90;
+            let x = 200 + 180 * Math.cos(ang * Math.PI / 180);
+            let y = 150 + 130 * Math.sin(ang * Math.PI / 180);
+            pkt.style.left = (x - 25) + "px";
+            pkt.style.top = (y - 25) + "px";
+
+            if (prog >= 1) {
+                clearInterval(animInterval);
+                document.getElementById("status").textContent = "Packet delivery complete!";
+            }
+        }, 30);
+    }
+
+    function reset() {
+        clearInterval(animInterval);
+        document.getElementById("packetCircle").style.display = "none";
+        document.getElementById("status").textContent = "Ready to send packet...";
+        document.getElementById("statusDetail").textContent = "";
+        for (let i = 1; i <= 6; i++) {
+            document.getElementById("step" + i).className = "journey-box";
+            document.getElementById("marker" + i).className = "stage-marker";
+        }
+    }
+</script>
 
 </body>
 
