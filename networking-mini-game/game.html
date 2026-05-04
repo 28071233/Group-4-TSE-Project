@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Networking Game</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        
+        <h1>🎮 Networking Game</h1>
+
+        <div class="nav">
+            <a href="index.html">🏠 Home</a>
+            <a href="game.html">🎮 Play Game</a>
+            <a href="concepts.html">📚 Learn</a>
+        </div>
+
+        <div class="game-container">
+            
+            <h2>Send Data Packets</h2>
+
+            <!-- Computers -->
+            <div class="computers">
+                <div class="computer">
+                    <div class="computer-label">💻 Computer A</div>
+                    <div class="ip-address">192.168.1.1</div>
+                </div>
+                <div class="arrow">→</div>
+                <div class="computer">
+                    <div class="computer-label">💻 Computer B</div>
+                    <div class="ip-address">192.168.1.2</div>
+                </div>
+            </div>
+
+            <!-- Packet Display -->
+            <div class="packet-display">
+                <div id="packet" class="packet" style="display: none;">📦</div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button onclick="sendPacket()">Send Packet</button>
+                <button onclick="reset()">Reset</button>
+            </div>
+
+            <!-- Status -->
+            <div id="status" class="status">
+                Ready to send packet...
+            </div>
+
+            <!-- Journey Steps -->
+            <h3>Packet Journey:</h3>
+            <div class="journey-container">
+                <div id="step1" class="journey-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Prepare</div>
+                </div>
+                <div id="step2" class="journey-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Send</div>
+                </div>
+                <div id="step3" class="journey-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Travel</div>
+                </div>
+                <div id="step4" class="journey-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Receive</div>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <h3>How It Works:</h3>
+            <div class="info-box">
+                <strong>Step 1 - Prepare:</strong> Computer A creates a packet with data and destination address
+            </div>
+            <div class="info-box">
+                <strong>Step 2 - Send:</strong> Packet leaves Computer A and starts traveling
+            </div>
+            <div class="info-box">
+                <strong>Step 3 - Travel:</strong> Packet moves across the network toward Computer B
+            </div>
+            <div class="info-box">
+                <strong>Step 4 - Receive:</strong> Computer B receives the packet and reads the data
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        let isAnimating = false;
+
+        function sendPacket() {
+            if (isAnimating) return;
+
+            isAnimating = true;
+            resetJourney();
+
+            let packet = document.getElementById("packet");
+            let status = document.getElementById("status");
+
+            packet.style.display = "block";
+            packet.style.left = "10px";
+            status.textContent = "📤 Sending packet from Computer A...";
+            
+            highlightStep(1);
+
+            // Step 2
+            setTimeout(function() {
+                highlightStep(2);
+                status.textContent = "📍 Packet is traveling...";
+            }, 500);
+
+            // Animation
+            let startTime = Date.now();
+            let duration = 2000;
+
+            let interval = setInterval(function() {
+                let elapsed = Date.now() - startTime;
+                let progress = elapsed / duration;
+
+                if (progress >= 1) {
+                    progress = 1;
+                    clearInterval(interval);
+                    
+                    highlightStep(4);
+                    packet.style.left = "85%";
+                    status.textContent = "Packet received at Computer B!";
+                    isAnimating = false;
+                } else {
+                    packet.style.left = (10 + progress * 75) + "%";
+                    if (progress > 0.3 && progress < 0.7) {
+                        highlightStep(3);
+                    }
+                }
+            }, 30);
+        }
+
+        function highlightStep(step) {
+            for (let i = 1; i <= 4; i++) {
+                let elem = document.getElementById("step" + i);
+                if (i === step) {
+                    elem.className = "journey-step active";
+                } else if (i < step) {
+                    elem.className = "journey-step completed";
+                } else {
+                    elem.className = "journey-step";
+                }
+            }
+        }
+
+        function resetJourney() {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById("step" + i).className = "journey-step";
+            }
+        }
+
+        function reset() {
+            isAnimating = false;
+            let packet = document.getElementById("packet");
+            let status = document.getElementById("status");
+
+            packet.style.display = "none";
+            packet.style.left = "10px";
+            status.textContent = "Ready to send packet...";
+            resetJourney();
+        }
+    </script>
+
+</body>
+</html>
