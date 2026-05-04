@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Networking Mini Game</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+            margin: auto;
+            margin-bottom: 30px;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #7C3AED;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            color: #06B6D4;
+        }
+
+        h1 {
+            color: #7C3AED;
+            flex-grow: 1;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 900px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        p {
+            color: #333;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .info-box {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        button {
+            background-color: #7C3AED;
+            color: white;
+            padding: 12px 25px;
+            margin: 20px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        button:hover {
+            background-color: #6D28D9;
+        }
+
+        a.play-btn {
+            background-color: #7C3AED;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        a.play-btn:hover {
+            background-color: #6D28D9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <a href="index.html" class="back">← Back to Home</a>
+        <h1>🌐 Networking Mini Game</h1>
+        <div></div>
+    </div>
+
+    <div class="container">
+        <p>
+            Welcome to the Networking Mini Game! This interactive educational application helps students 
+            understand how data packets travel between computers over a network. Learn networking concepts 
+            through visualization and hands-on interaction.
+        </p>
+
+        <div class="info-box">
+            <strong>What You'll Learn:</strong>
+            <ul style="text-align: left;">
+                <li>How data packets are transmitted between computers</li>
+                <li>Understanding IP addresses and their role in networking</li>
+                <li>How routers guide data to its destination</li>
+                <li>The fundamentals of internet communication</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <strong>Features:</strong>
+            <ul style="text-align: left;">
+                <li>Interactive packet animation showing real-time data transmission</li>
+                <li>Step-by-step journey visualization (Prepare → Send → Travel → Receive)</li>
+                <li>Educational explanations of networking concepts</li>
+                <li>Responsive design for all devices</li>
+            </ul>
+        </div>
+
+        <a href="networking-mini-game/index.html" class="play-btn">Start Playing →</a>
+    </div>
+
+</body>
+
+</html>
