@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+header {
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #000000;
+}
+
+h1 {
+    text-align: center;
+}
+
+a {
+    position: absolute;
+    right: 5%;
+    top: 80%;
+}
+
+button {
+    width: 200px;
+    height: 100px;
+}
+
+#instructions {
+    width: 350px;
+    position: fixed;
+    top: 15%;
+    left: 75%;
+    border: 1px solid #000000;
+}
+
+#components {
+    width: 100%;
+    border: 1px solid #000000;
+    position: absolute;
+    bottom: 0;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+#motherboard {         
+    width: 30%;
+    height: 70%;
+    position: absolute;
+    left: 30%;
+}
+
+#case {
+    display: none;
+    width: 40%;
+    height: 67%;
+    position: absolute;
+    left: 20%;
+    top: 15%;
+}
+
+#div1 {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 43%;
+    top: 27%;
+    border: 0px solid #ff0000;
+}
+
+#div2 {
+    width: 20px;
+    height: 200px;
+    position:absolute;
+    left: 53.5%;
+    top: 20%;
+    border: 0px solid #ff0000;
+}
+
+#div3 {
+    width: 20px;
+    height: 200px;
+    position:absolute;
+    left: 55.5%;
+    top: 20%;
+    border: 0px solid #ff0000;
+}
+
+#div4 {
+    width: 200px;
+    height: 40px;
+    position:absolute;
+    left: 35%;
+    top: 47%;
+    border: 0px solid #ff0000;
+}
+
+#div5 {
+    display: none;
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    left: 42.5%;
+    top: 26%;
+    border: 0px solid #00ffff;
+}
+
+#div6 {
+    display: none;
+    width: 300px;
+    height: 40px;
+    position: absolute;
+    left: 21%;
+    top: 47%;
+    border: 0px solid #ff0000;
+}
+
+#div7 {
+    display: none;
+    width: 130px;
+    height: 70px;
+    position: absolute;
+    left: 22%;
+    top: 69%;
+    border: 0px solid #ff0000;
+}

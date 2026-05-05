@@ -3,10 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="assets\css\architecture.css">
+    <title>PC building walkthrough</title>
 </head>
+
+<script src="assets\js\architecture.js"></script>
+
 <body>
-    <h1>architecture</h1>
-    <a href="index.html" target="_self">Back</a>
+    <header>
+        <h1>Build your own Computer!</h1>
+        <a href="index.html" target="_self">Back</a>
+    </header>
+
+
+    <div id="instructions">
+        <p id="stepnumber">Step 1</p>
+        <p id="stepinstruction">
+            Our first step is installing the CPU. To do this, the CPU retention bracket is lifted so we can gain access to the CPU socket
+            Next, we carefully hold the CPU by it's sides and allign the triangle in the corner with the one on the socket.
+            Afterwards, we place the cpu into the socket and give it a little wiggle to ensure it's securely in place.
+            Finally, we close the retention bracket, ensuring that the cpu is secured to the motherboard.
+        </p>
+    </div>
+    
+    <button id="helpbutton" type="button" onclick="helpuser(step)">Help</button>
+
+    <img id="case" src="assets\img\architecture\case.png" draggable="false">
+    <img id="motherboard" src="assets\img\architecture\motherboard.png" draggable="false">
+
+    <div id="div1" ondrop="dropHandlerCPU(event)"   ondragover="dragoverHandler(event)"></div>
+    <div id="div2" ondrop="dropHandlerRAM(event)"   ondragover="dragoverHandler(event)"></div>
+    <div id="div3" ondrop="dropHandlerRAM(event)"   ondragover="dragoverHandler(event)"></div>
+    <div id="div4" ondrop="dropHandlerM2SSD(event)"   ondragover="dragoverHandler(event)"></div>
+    <div id="div5" ondrop="dropHandlerCPUFan(event)"   ondragover="dragoverHandler(event)"></div>
+    <div id="div6" ondrop="dropHandlerGPU(event)"   ondragover="dragoverHandler(event)"></div>
+    <div id="div7" ondrop="dropHandlerPSU(event)"   ondragover="dragoverHandler(event)"></div>
+
+    <br>
+
+    <section id="components">
+        <img id="cpu" src="assets\img\architecture\cpu.png" draggable="true" ondragstart="dragstartHandler(event)" width="100" height="100">
+        <img id="ram1" src="assets\img\architecture\ram.png" draggable="false" ondragstart="dragstartHandler(event)" width="336" height="69">
+        <img id="ram2" src="assets\img\architecture\ram.png" draggable="false" ondragstart="dragstartHandler(event)" width="336" height="69">
+        <img id="m2ssd" src="assets\img\architecture\m2ssd.jpg" draggable="false" ondragstart="dragstartHandler(event)" width="200" height="40">
+        <img id="cpufan" src="assets\img\architecture\cpufan.png" draggable="false" ondragstart="dragstartHandler(event)" width="120" height="120">
+        <img id="gpu" src="assets\img\architecture\gpu.png" draggable="false" ondragstart="dragstartHandler(event)" width="336" height="120">
+        <img id="psu" src="assets\img\architecture\psu.png" draggable="false" ondragstart="dragstartHandler(event)" width="336" height="120">
+    </section>
+
 </body>
 </html>
