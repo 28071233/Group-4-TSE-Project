@@ -3,90 +3,8 @@
 <head>
     <title>Programming in Python</title>
 
-    <style>
-        /* General page styling */
-        body {
-            font-family: Arial;
-            text-align: center;
-            background: white;
-        }
-
-        /* Main container to centre content */
-        .container {
-            width: 60%;
-            margin: auto;
-            padding: 20px;
-        }
-
-        /* Header layout */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Back button styling */
-        .back {
-            text-decoration: none;
-            color: #3498db;
-            font-size: 14px;
-        }
-
-        /* Box that displays each question */
-        .questionBox {
-            margin-top: 20px;
-            background: #f4f4f4;
-            padding: 20px;
-            border-radius: 10px;
-            font-size: 18px;
-        }
-
-        /* Input box styling */
-        input {
-            padding: 8px;
-            margin-top: 15px;
-            width: 60%;
-        }
-
-        /* Button styling */
-        button {
-            padding: 10px 20px;
-            margin: 10px 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background: #3498db;
-            color: white;
-        }
-
-        /* Hint button with different colour */
-        .hintBtn { background: #f39c12; }
-
-        /* Feedback text (Correct / Try again) */
-        #feedback {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        /* Hint text styling */
-        #hint {
-            margin-top: 10px;
-            color: #555;
-            font-style: italic;
-        }
-
-        /* Console box simulate Python output */
-        .console {
-            margin-top: 20px;
-            background: black;
-            color: lime;
-            padding: 15px;
-            text-align: left;
-            font-family: monospace;
-            border-radius: 5px;
-            display: none; /* hidden until answer is correct */
-        }
-    </style>
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="assets/css/programming.css">
 </head>
 
 <body>
@@ -112,139 +30,26 @@
     <!-- Buttons -->
     <button id="submitBtn" onclick="checkAnswer()">Submit</button>
     <button id="hintBtn" class="hintBtn" onclick="showHint()">Show Hint</button>
-    <button onclick="skipQuestion()">Skip</button>
+    <button id="skipBtn" onclick="skipQuestion()">Skip</button>
+    <button class="showAnswersBtn" onclick="toggleAnswers()">Show Answers</button>
 
-    <!-- Hint and feedback text -->
+    <!-- Try again button -->
+    <button id="retryBtn" class="retryBtn" onclick="restartQuiz()">Try Again</button>
+
+    <!-- Hint and feedback -->
     <p id="hint"></p>
     <p id="feedback"></p>
 
-    <!-- Console output display -->
+    <!-- Console output -->
     <div class="console" id="console"></div>
+
+    <!-- Answers display -->
+    <div id="answersBox"></div>
 
 </div>
 
-<script>
-
-/* Array storing all questions, answers, hints and outputs */
-const questions = [
-{
-    q: "Fill in the blank:<br><br>___('Hello World')",
-    a: "print",
-    hint: "Displays text to the screen.",
-    output: "Hello World"
-},
-{
-    q: "Fill in the blank:<br><br>___ x > 10:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Big')",
-    a: "if",
-    hint: "Used to check a condition.",
-    output: "Big"
-},
-{
-    q: "Fill in the blank:<br><br>if x > 10:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Big')<br>___:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Small')",
-    a: "else",
-    hint: "Runs when the if condition is false.",
-    output: "Small"
-},
-{
-    q: "Fill in the blank:<br><br>for i in ___(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)",
-    a: "range",
-    hint: "Used to repeat code a number of times.",
-    output: "0\n1\n2"
-},
-{
-    q: "Fill in the blank:<br><br>for i in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;___('Loop')",
-    a: "print",
-    hint: "Outputs text each loop.",
-    output: "Loop\nLoop\nLoop"
-}
-];
-
-/* Tracks current question index */
-let current = 0;
-
-/* Tracks number of correct answers */
-let score = 0;
-
-/* Function to load and display a question */
-function loadQuestion() {
-
-    // If all questions have been completed
-    if (current >= questions.length) {
-
-        // Show completion message and score
-        document.getElementById("question").innerHTML =
-            "Completed!<br><br>Score: " + score + "/" + questions.length;
-
-        // Hide input and buttons after completion
-        document.getElementById("answer").style.display = "none";
-        document.getElementById("submitBtn").style.display = "none";
-        document.getElementById("hintBtn").style.display = "none";
-        document.getElementById("console").style.display = "none";
-        document.querySelector("button[onclick='skipQuestion()']").style.display = "none"; 
-
-        // Clear any leftover text
-        document.getElementById("feedback").innerText = "";
-        document.getElementById("hint").innerText = "";
-
-        return; // stop function running further
-    }
-
-    // Display current question
-    document.getElementById("question").innerHTML = questions[current].q;
-
-    // Reset input and messages
-    document.getElementById("feedback").innerText = "";
-    document.getElementById("hint").innerText = "";
-    document.getElementById("answer").value = "";
-
-    // Hides console until correct answer is given
-    document.getElementById("console").style.display = "none";
-}
-
-/* Function to check the user's answer */
-function checkAnswer() {
-
-    // Get and validate user input
-    let user = document.getElementById("answer").value.trim().toLowerCase();
-
-    let correct = questions[current].a.toLowerCase();
-    
-    if (user === correct) {
-
-        document.getElementById("feedback").innerText = "Correct";
-
-        score++; 
-
-        // Show console output
-        let consoleBox = document.getElementById("console");
-        consoleBox.style.display = "block";
-        consoleBox.innerText = questions[current].output;
-
-        current++; 
-
-        // Load next question
-        setTimeout(loadQuestion, 2000);
-
-    } else {
-        document.getElementById("feedback").innerText = "Try again or use a hint";
-    }
-}
-
-/* Function to skip question */
-function skipQuestion() {
-    current++; 
-    loadQuestion();
-}
-
-/* Function to display hint */
-function showHint() {
-    document.getElementById("hint").innerText =
-        "Hint: " + questions[current].hint;
-}
-
-loadQuestion();
-
-</script>
+<!-- Link to external JavaScript -->
+<script src="assets/js/programming.js"></script>
 
 </body>
 </html>
