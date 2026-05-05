@@ -1,0 +1,98 @@
+/* General page styling */
+body {
+    font-family: Arial;
+    text-align: center;
+    background: white;
+}
+
+/* Main container to centre content */
+.container {
+    width: 60%;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Header layout */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Back button styling */
+.back {
+    text-decoration: none;
+    color: #3498db;
+    font-size: 14px;
+}
+
+/* Box that displays each question */
+.questionBox {
+    margin-top: 20px;
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+/* Input box styling */
+input {
+    padding: 8px;
+    margin-top: 15px;
+    width: 60%;
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #3498db;
+    color: white;
+}
+
+/* Hint button with different colour */
+.hintBtn { background: #f39c12; }
+
+/* Show answers button styling */
+.showAnswersBtn { background: #2ecc71; }
+
+/* Try again button styling */
+.retryBtn { background: #9b59b6; display: none; }
+
+/* Feedback text */
+#feedback {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Hint text styling */
+#hint {
+    margin-top: 10px;
+    color: #555;
+    font-style: italic;
+}
+
+/* Console box simulating Python output */
+.console {
+    margin-top: 20px;
+    background: black;
+    color: lime;
+    padding: 15px;
+    text-align: left;
+    font-family: monospace;
+    border-radius: 5px;
+    display: none;
+}
+
+/* Answers display box */
+#answersBox {
+    display: none;
+    margin-top: 20px;
+    text-align: left;
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 10px;
+}
