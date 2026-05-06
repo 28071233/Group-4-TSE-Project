@@ -24,7 +24,7 @@
             font-size: 14px;
         }
 
-        /* Email display box */
+        /* Email / link display box */
         .email {
             text-align: left;
             border: 1px solid #ccc;
@@ -54,41 +54,78 @@
     <!-- Header section -->
     <div class="header">
         <h1>Cyber Security</h1>
-        <!-- Back button to homepage -->
         <a href="index.html" class="back">Back</a>
     </div>
 
-    <h2>Spot the Phishing Email</h2>
+    <!-- ================= MAIN MENU ================= -->
+    <div id="menu">
+        <h2>Select a Game</h2>
+        <button onclick="startPhishing()">Phishing Game</button>
+        <button onclick="startLinks()">Suspicious Links Game</button>
+    </div>
 
-    <!-- Game area -->
-    <div id="game">
+    <!-- ================= PHISHING GAME ================= -->
+    <div id="game" style="display:none;">
 
-        <!-- Email content shown to user -->
+        <h2>Spot the Phishing Email</h2>
+
         <div class="email">
             <p><strong>From:</strong> <span id="from"></span></p>
             <p><strong>Subject:</strong> <span id="subject"></span></p>
             <p id="body"></p>
         </div>
 
-        <!-- Answer buttons -->
         <button class="phish" onclick="answer('phishing')">Phishing</button>
         <button class="safe" onclick="answer('safe')">Safe</button>
 
-        <!-- Feedback + explanation -->
         <p id="feedback"></p>
         <p id="explanation"></p>
     </div>
 
-    <!-- End screen -->
+    <!-- ================= LINK GAME ================= -->
+    <div id="linkGame" style="display:none;">
+
+        <h2>Is This Link Safe?</h2>
+
+        <div class="email">
+            <p id="linkText"></p>
+        </div>
+
+        <button class="safe" onclick="answerLink('safe')">Safe</button>
+        <button class="phish" onclick="answerLink('phishing')">Suspicious</button>
+
+        <p id="linkFeedback"></p>
+        <p id="linkExplanation"></p>
+    </div>
+
+    <!-- ================= END SCREEN ================= -->
     <div id="end" style="display:none;">
         <h2>Quiz Complete</h2>
         <p>Your Score: <span id="finalScore"></span></p>
-        <button onclick="restart()">Play Again</button>
+        <button onclick="restart()">Back to Menu</button>
     </div>
 
 </div>
 
 <script>
+
+/* ================= MENU FUNCTIONS ================= */
+
+/* Start phishing game */
+function startPhishing() {
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("game").style.display = "block";
+    loadEmail();
+}
+
+/* Start link game */
+function startLinks() {
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("linkGame").style.display = "block";
+    loadLink();
+}
+
+/* ================= PHISHING GAME ================= */
 
 /* List of emails for the quiz */
 const emails = [
@@ -115,23 +152,17 @@ let score = 0;
 /* Load an email onto the page */
 function loadEmail() {
 
-    // If no more emails, show final screen
     if (index >= emails.length) {
-        document.getElementById("game").style.display = "none";
-        document.getElementById("end").style.display = "block";
-        document.getElementById("finalScore").innerText = score + "/" + emails.length;
+        endGame(score, emails.length);
         return;
     }
 
-    // Get current email
     let e = emails[index];
 
-    // Display email details
     document.getElementById("from").innerText = e.from;
     document.getElementById("subject").innerText = e.subject;
     document.getElementById("body").innerText = e.body;
 
-    // Clear previous feedback
     document.getElementById("feedback").innerText = "";
     document.getElementById("explanation").innerText = "";
 }
@@ -141,34 +172,107 @@ function answer(choice) {
 
     let correct = emails[index];
 
-    // Compare user choice with correct answer
     if (choice === correct.answer) {
-        score++; // increase score
+        score++;
         document.getElementById("feedback").innerText = "Correct";
     } else {
         document.getElementById("feedback").innerText = "Incorrect";
     }
 
-    // Show explanation
     document.getElementById("explanation").innerText = correct.explanation;
 
-    index++; // move to next email
+    index++;
 
-    // Load next email after 2 seconds
     setTimeout(loadEmail, 2000);
 }
 
-/* Restart the game */
+/* ================= LINK GAME ================= */
+
+/* List of links for the quiz */
+const links = [
+{
+url: "https://paypal.com",
+answer: "safe",
+explanation: "Correct domain name."
+},
+{
+url: "https://paypa1-login-secure.ru",
+answer: "phishing",
+explanation: "Misspelling and suspicious domain."
+},
+{
+url: "http://secure-amazon-login.net",
+answer: "phishing",
+explanation: "Fake domain and no HTTPS."
+},
+{
+url: "https://google.com",
+answer: "safe",
+explanation: "Trusted domain."
+}
+];
+
+/* Track link game progress */
+let linkIndex = 0;
+let linkScore = 0;
+
+/* Load a link onto the page */
+function loadLink() {
+
+    if (linkIndex >= links.length) {
+        endGame(linkScore, links.length);
+        return;
+    }
+
+    let l = links[linkIndex];
+
+    document.getElementById("linkText").innerText = l.url;
+
+    document.getElementById("linkFeedback").innerText = "";
+    document.getElementById("linkExplanation").innerText = "";
+}
+
+/* Check user answer for link game */
+function answerLink(choice) {
+
+    let correct = links[linkIndex];
+
+    if (choice === correct.answer) {
+        linkScore++;
+        document.getElementById("linkFeedback").innerText = "Correct";
+    } else {
+        document.getElementById("linkFeedback").innerText = "Incorrect";
+    }
+
+    document.getElementById("linkExplanation").innerText = correct.explanation;
+
+    linkIndex++;
+
+    setTimeout(loadLink, 2000);
+}
+
+/* ================= END / RESET ================= */
+
+/* Show final score */
+function endGame(finalScoreValue, total) {
+
+    document.getElementById("game").style.display = "none";
+    document.getElementById("linkGame").style.display = "none";
+    document.getElementById("end").style.display = "block";
+
+    document.getElementById("finalScore").innerText = finalScoreValue + "/" + total;
+}
+
+/* Restart back to menu */
 function restart() {
     index = 0;
     score = 0;
-    document.getElementById("game").style.display = "block";
-    document.getElementById("end").style.display = "none";
-    loadEmail();
-}
+    linkIndex = 0;
+    linkScore = 0;
 
-// Start the game
-loadEmail();
+    document.getElementById("menu").style.display = "block";
+    document.getElementById("end").style.display = "none";
+}
 
 </script>
 
