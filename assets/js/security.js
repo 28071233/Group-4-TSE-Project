@@ -1,5 +1,3 @@
-<script>
-
 /* ================= MENU FUNCTIONS ================= */
 
 /* Start phishing game */
@@ -164,5 +162,3 @@ function restart() {
     document.getElementById("menu").style.display = "block";
     document.getElementById("end").style.display = "none";
 }
-
-</script>
