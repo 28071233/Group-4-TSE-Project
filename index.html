@@ -3,77 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="assets\css\index.css">
+    <script src="assets\js\index.js"></script>
     <title>Welcome to Computer Science!</title>
 
-    <style>
-        body {
-            background-color: #161b22;
-        }
-
-        h1 {
-            color: cornsilk;
-            text-align: center;
-            margin-left: 32%;
-        }
-
-        /*Sidebar placement and style */
-        aside {
-            height: 100%;
-            width: 32%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            padding-top: 20px;
-        }
-
-        /*Sidebar options style*/
-        aside a {
-            padding: 6px 8px 6px 16px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-        }
-
-        /*Main page content placement*/
-        div {
-            margin-left: 32%; /*margin left must be the same as the width of aside*/
-            padding: 0px 10px;
-            color: azure;
-        }
-    </style>
-
-    <script>
-        function welcomeText() {
-            document.getElementById("pageText").innerHTML = "Welcome to Computer Science! hover over the buttons on the sidebar to update this text";
-        }
-
-        function aiText() {
-            document.getElementById("pageText").innerHTML = "Artificial Inteligence";
-        }
-
-        function algorithmsText() {
-            document.getElementById("pageText").innerHTML = "Algorithms";
-        }
-
-        function architectureText() {
-            document.getElementById("pageText").innerHTML = "Architecture";
-        }
-
-         function cyberSecurityText() {
-            document.getElementById("pageText").innerHTML = "Cyber Security";
-        }
-
-        function programmingText() {
-            document.getElementById("pageText").innerHTML = "Programming Fundamentals";
-        }
-
-        function networkingText() {
-            document.getElementById("pageText").innerHTML = "Networking";
-        }
-    </script>
 </head>
+
 
 <body>
     <h1>Welcome to Computer Science!</h1>
@@ -89,7 +24,13 @@
     </aside>
     <!-- Page Content -->
     <div>
-        <p id="pageText">Welcome to Computer Science! hover over the buttons on the sidebar to update this text</p>
+        <img id="coverimg" src="assets\img\index\computerscience.jpg" alt="Flowers in placeholder" width="460" height="345">
+
+        <!-- give topic definition -->
+        <p id="topicDefinition">Welcome to Computer Science!</p>
+
+        <!-- describe how this application shows the module -->
+        <p id="pageText">Hover over the buttons on the sidebar to update this text</p>
     </div>
 </body>
 </html>

@@ -1,0 +1,41 @@
+body {
+    background-color: #161b22;
+}
+
+h1 {
+    color: cornsilk;
+    text-align: center;
+    margin-left: 32%;
+}
+
+#coverimg {
+    position: relative;
+    left: 25%;
+}
+
+/*Sidebar placement and style */
+aside {
+    height: 100%;
+    width: 32%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    padding-top: 20px;
+}
+
+/*Sidebar options style*/
+aside a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+/*Main page content placement*/
+div {
+    margin-left: 32%; /*margin left must be the same as the width of aside*/
+    padding: 0px 10px;
+    color: azure;
+}
